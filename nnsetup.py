@@ -20,6 +20,9 @@ class nn(object):
 		self.W = {}
 		self.vW = {}
 		self.p = {}
+		self.a = {}
+		self.e = {}
+		self.L = {}
 		for i in range(1,self.n):
 			self.W[i] = (nprandom((self.size[i],self.size[i-1]+1)) - 0.5) *2 * 4 * math.sqrt(6/(self.size[i] + self.size[i-1])) 
 			self.vW[i] = np.zeros((self.W[i].shape))
