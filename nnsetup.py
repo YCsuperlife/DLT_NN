@@ -19,6 +19,7 @@ class nn(object):
 		self.n = len(size)
 		self.W = {}
 		self.vW = {}
+		self.dW = {}
 		self.p = {}
 		self.a = {}
 		self.e = {}

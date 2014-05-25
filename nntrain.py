@@ -2,10 +2,11 @@ import numpy as np
 
 def nntrain(nn, train_x, train_y, opts, val_x, val_y):
 	assert type(train_x) == float
-	loss_train_e = []
-	loss_train_e_frac = []
-	loss_val_e = []
-	loss_val_e_frac = []
+	loss = {}
+	loss['train_e'] = []
+	loss['train_e_frac'] = []
+	loss['val_e'] = []
+	loss['val_e_frac'] = []
 	if val_x:
 		opts.validation = 1
 	else:
@@ -24,12 +25,12 @@ def nntrain(nn, train_x, train_y, opts, val_x, val_y):
 	for i in range(0,numepochs):
 		kk = np.random.permutation(range(1,m+1))
 		for j in range(0, numbatches):
-			batch_x = train_x[(kk[(j-1)*batchsize+1:j*batchsize],:]
-			batch_y = train_y[(kk[(j-1)*batchsize+1:j*batchsize],:]
+			batch_x = train_x[(kk[(j-1)*batchsize+1:j*batchsize]),:]
+			batch_y = train_y[(kk[(j-1)*batchsize+1:j*batchsize]),:]
 			nn = nnff(nn, batch_x, batch_y)
 			nn = nnbp(nn)
 			nn = nnapplygrads(nn)
-			L(n) = nn.L
+			L[n] = nn.L
 			n = n+1
 		if opts.validation ==1:
 			loss = nneval(nn, loss,train_x, val_x, val_y)
@@ -37,5 +38,4 @@ def nntrain(nn, train_x, train_y, opts, val_x, val_y):
 		else:
 			loss = nneval(nn, loss, train_x, train_y)
 			print '; Full-batch train err = %f' % loss.train.e(end)
-	
-		
+	return nn, L
