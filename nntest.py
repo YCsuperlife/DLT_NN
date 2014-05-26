@@ -1,4 +1,5 @@
 import numpy as np
+import nnpredict
 
 def nntest(nn,x,y):
 	labels = nnpredict(nn,x)

@@ -1,5 +1,8 @@
 import numpy as np
-
+import nneval
+import nnff
+import nnbp
+import nnapplygrads
 def nntrain(nn, train_x, train_y, opts, val_x, val_y):
 	assert type(train_x) == float
 	loss = {}

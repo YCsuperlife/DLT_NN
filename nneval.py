@@ -1,6 +1,6 @@
 import numpy as np
 import nnff
-
+import nntest
 def nneval(nn, loss, train_x, train_y, val_x, val_y):
 	nn.testing = 1
 	nn = nnff(nn, train_x, train_y)
