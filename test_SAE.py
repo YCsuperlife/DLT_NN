@@ -1,8 +1,8 @@
 import numpy as np
 from struct import *
 import nnopts
-import saesetup
-import saetrain
+import saesetup as saes
+import saetrain as saet
 
 def MNISTexample(startN,howMany,bTrain=True,only01=False):
     if bTrain:
@@ -63,8 +63,15 @@ for i in test:
 	test_x = i[0]
 	test_y = i[1]
 
-newsae = saesetup([784, 100])
+newsae = saes.saesetupm(np.ndarray((784,100)))
 newsae[1].activation_function = 'sigm'
+newsae[1].learningRate = 1
+newsae[1].inputZeroMaskedFraction = 0.5
+opts = nnopts(100,1)
+
+newsae = saet.saetrain(newsae, train_x, opts)
+print newsae[1].W[1]
+
 
 
 

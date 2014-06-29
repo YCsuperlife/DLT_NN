@@ -1,5 +1,5 @@
-class opts(object):
-	def __init__(self,validation,batchsize,numepochs,plot):
+class nnopts(object):
+	def __init__(self,batchsize,numepochs,validation = '',plot=0):
                 self.validation = validation
                 self.batchsize = batchsize
                 self.numepochs = numepochs
