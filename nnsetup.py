@@ -1,10 +1,11 @@
 from numpy.random import random as nprandom
 import numpy as np
+import numpy.random as npr
 import math
 
 class nn(object):
-	def __init__(self,size):
-		self.size = size
+	def __init__(self,nnsize):
+		self.size = nnsize
 		self.activationfn = 'tanh'
 		self.learningRate = 2
 		self.momentum = 0.5
@@ -16,7 +17,7 @@ class nn(object):
 		self.dropoutFraction = 0
 		self.testing = 0
 		self.output = 'sigm'
-		self.n = len(size)
+		self.n = len(nnsize)
 		self.W = {}
 		self.vW = {}
 		self.dW = {}
@@ -25,9 +26,9 @@ class nn(object):
 		self.e = {}
 		self.L = {}
 		for i in range(1,self.n):
-			self.W[i] = (nprandom((self.size[i],self.size[i-1]+1)) - 0.5) *2 * 4 * math.sqrt(6/(self.size[i] + self.size[i-1])) 
+			self.W[i] = (npr.random_sample((nnsize[i],nnsize[i-1]+1)) - 0.5) *2 * 4 * math.sqrt(6/(nnsize[i] + nnsize[i-1])) 
 			self.vW[i] = np.zeros((self.W[i].shape))
-			self.p[i+1] = np.zeros((1, self.size[i+1]))
+			self.p[i+1] = np.zeros((1, nnsize[i]))
 	def __str__(self):
                 return str(self.output)
         def __repr__(self):

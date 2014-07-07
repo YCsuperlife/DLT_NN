@@ -3,8 +3,8 @@ import nneval
 import nnff
 import nnbp
 import nnapplygrads
-def nntrain(nn, train_x, train_y, opts, val_x, val_y):
-	assert type(train_x) == float
+def nntrain(nn, train_x, train_y, opts, val_x=9, val_y=9):
+	#assert type(train_x) == float
 	loss = {}
 	loss['train_e'] = []
 	loss['train_e_frac'] = []
@@ -18,12 +18,12 @@ def nntrain(nn, train_x, train_y, opts, val_x, val_y):
 	if opts.plot ==1 :
 		fhandle = figure();
 	'''
-	m = train_x.shape[0]
+	m = len(train_x)
 	batchsize = opts.batchsize
 	numepochs = opts.numepochs
 	numbatches = m/batchsize
-	assert m % batchsize == 0	
-	L = np.zeros(numepochs*numbatches,1)
+	assert m%batchsize==0
+	L = np.zeros((numepochs*numbatches,1))
 	n = 1
 	for i in range(0,numepochs):
 		kk = np.random.permutation(range(1,m+1))

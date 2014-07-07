@@ -1,6 +1,6 @@
 import numpy as np
 from struct import *
-import nnopts
+import nnopts as nno
 import saesetup as saes
 import saetrain as saet
 
@@ -50,24 +50,25 @@ def MNISTexample(startN,howMany,bTrain=True,only01=False):
             
     fImages.close()
     fLabels.close()
-
     return T
+
+train_x, train_y, test_x, test_y = [],[],[],[]
 
 train =  MNISTexample(0,2000)
 for i in train:
-	train_x = i[0]
-	train_y = i[1]
+	train_x.append(i[0])
+	train_y.append(i[1])
 
 test = MNISTexample(2000,2500)
 for i in test:
-	test_x = i[0]
-	test_y = i[1]
+	test_x.append(i[0])
+	test_y.append(i[1])
 
-newsae = saes.saesetupm(np.ndarray((784,100)))
+newsae = saes.saesetupm([784,100])
 newsae[1].activation_function = 'sigm'
 newsae[1].learningRate = 1
 newsae[1].inputZeroMaskedFraction = 0.5
-opts = nnopts(100,1)
+opts = nno.nnopts(100,1)
 
 newsae = saet.saetrain(newsae, train_x, opts)
 print newsae[1].W[1]
